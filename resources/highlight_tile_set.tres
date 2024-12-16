@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bi2ppix44xoep"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bi2ppix44xoep"]
 
-[ext_resource type="Texture2D" uid="uid://dwp8eilbaq4vb" path="res://assets/highlight_tile.png" id="1_4121v"]
+[ext_resource type="Texture2D" uid="uid://dwp8eilbaq4vb" path="res://assets/tiles/highlight_tile.png" id="1_h8sc4"]
+[ext_resource type="Texture2D" uid="uid://cyjq30pq7casn" path="res://assets/tiles/tilemap_flat.png" id="2_5e4pp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f27if"]
-texture = ExtResource("1_4121v")
+texture = ExtResource("1_h8sc4")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -22,6 +23,13 @@ texture_region_size = Vector2i(64, 64)
 2:3/0 = 0
 3:3/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xi7x4"]
+texture = ExtResource("2_5e4pp")
+texture_region_size = Vector2i(64, 64)
+5:0/0 = 0
+
 [resource]
 tile_size = Vector2i(64, 64)
+terrain_set_0/mode = 2
 sources/0 = SubResource("TileSetAtlasSource_f27if")
+sources/1 = SubResource("TileSetAtlasSource_xi7x4")
