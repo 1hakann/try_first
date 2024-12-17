@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://b72yrxydcxlma"]
+[gd_scene load_steps=7 format=4 uid="uid://b72yrxydcxlma"]
 
 [ext_resource type="Script" path="res://scenes/Main.cs" id="1_pa42j"]
+[ext_resource type="PackedScene" uid="uid://coo4wg05bohbh" path="res://scenes/building/Base.tscn" id="2_42q40"]
 [ext_resource type="TileSet" uid="uid://bpwyqmiaf3w27" path="res://resources/tiles.tres" id="2_sf6hj"]
 [ext_resource type="TileSet" uid="uid://bi2ppix44xoep" path="res://resources/highlight_tile_set.tres" id="2_t1paf"]
 [ext_resource type="PackedScene" uid="uid://dfn3t1eb2rfpa" path="res://scenes/manager/GridManager.tscn" id="4_bowr8"]
@@ -10,6 +11,8 @@ size = Vector2(64, 64)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_pa42j")
+
+[node name="Base" parent="." instance=ExtResource("2_42q40")]
 
 [node name="GridManager" parent="." node_paths=PackedStringArray("highlightTilemapLayer", "baseTerrainTilemapLayer") instance=ExtResource("4_bowr8")]
 highlightTilemapLayer = NodePath("../HighlightTileMapLayer")
@@ -25,7 +28,7 @@ position = Vector2(0, 1)
 tile_set = ExtResource("2_t1paf")
 
 [node name="Cursor" type="Sprite2D" parent="."]
-position = Vector2(-1, 66)
+position = Vector2(127, 240)
 texture = SubResource("PlaceholderTexture2D_2jeoy")
 centered = false
 

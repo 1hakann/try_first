@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Godot;
+using System.Linq;
+using Game.Component;
 
 namespace Game.Manager;
 
@@ -28,21 +30,6 @@ public partial class GridManager : Node
 		occupiedCells.Add(tilePosition);
 	}
 
-	public void HighlightValidTilesInRadius(Vector2I rootCell, int radius)
-	{
-		ClearHighlightedTiles();
-
-		for (var x = rootCell.X - radius; x <= rootCell.X + radius; x++)
-		{
-			for (var y = rootCell.Y - radius; y <= rootCell.Y + radius; y++)
-			{
-				var tilePosition = new Vector2I(x, y);
-				if (!IsTilePositionValid(tilePosition)) continue;
-				highlightTilemapLayer.SetCell(tilePosition, 0, Vector2I.Zero);
-			}
-		}
-	}
-
 	public void ClearHighlightedTiles()
 	{
 		highlightTilemapLayer.Clear();
@@ -54,5 +41,30 @@ public partial class GridManager : Node
 		var gridPosition = mousePosition / 64;
 		gridPosition = gridPosition.Floor();
 		return new Vector2I((int) gridPosition.X, (int) gridPosition.Y);
+	}
+
+	public void HighlightBuildableTiles()
+	{
+		ClearHighlightedTiles();
+
+		var buildingComponents = GetTree().GetNodesInGroup(nameof(BuildingComponent)).Cast<BuildingComponent>();
+
+		foreach(var buildingComponent in buildingComponents)
+		{
+			HighlightValidTilesInRadius(buildingComponent.GetGridCellPosition(), buildingComponent.BuildableRadius);
+		}
+	}
+
+	public void HighlightValidTilesInRadius(Vector2I rootCell, int radius)
+	{
+		for (var x = rootCell.X - radius; x <= rootCell.X + radius; x++)
+		{
+			for (var y = rootCell.Y - radius; y <= rootCell.Y + radius; y++)
+			{
+				var tilePosition = new Vector2I(x, y);
+				if (!IsTilePositionValid(tilePosition)) continue;
+				highlightTilemapLayer.SetCell(tilePosition, 0, Vector2I.Zero);
+			}
+		}
 	}
 }
